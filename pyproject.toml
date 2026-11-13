@@ -37,10 +37,15 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
+server = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+]
 dev = [
     "pytest>=8.0.0",
     "pytest-cov>=5.0.0",
     "ruff>=0.4.0",
+    "mypy>=1.10.0",
 ]
 
 [project.scripts]
@@ -55,6 +60,12 @@ Issues = "https://github.com/codesphere-u/truthgate/issues"
 where = ["."]
 include = ["truthgate*"]
 
+[tool.setuptools.package-data]
+truthgate = ["py.typed"]
+
+[tool.vercel]
+entrypoint = "api.index:app"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
@@ -63,3 +74,10 @@ addopts = "-q"
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+ignore_missing_imports = true

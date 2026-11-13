@@ -5,6 +5,7 @@ from truthgate.corrector import SurgicalRepairCompiler, TruthGateVerifier
 from truthgate.decomposer import ClaimDecomposer
 from truthgate.entailment import CitationEntailmentVerifier
 from truthgate.grounding import WorkspaceSymbolGrounder
+from truthgate.http_server import TruthGateHTTPApp, create_http_server, serve_http
 from truthgate.mcp_server import TruthGateMCPServer
 from truthgate.models import (
     RULE_MAP,
@@ -23,7 +24,8 @@ from truthgate.models import (
 __version__ = "1.0.0"
 
 __all__ = [
-    "__version__",
+    "RULES",
+    "RULE_MAP",
     "AtomicClaim",
     "CitationEntailmentVerifier",
     "ClaimDecomposer",
@@ -31,16 +33,18 @@ __all__ = [
     "CodeReference",
     "GroundingReport",
     "NumericToken",
-    "RULE_MAP",
-    "RULES",
     "RuleDefinition",
     "SourceDocument",
     "SurgicalRepairCompiler",
+    "TruthGateHTTPApp",
     "TruthGateMCPServer",
     "TruthGateVerifier",
     "VerdictStatus",
     "VerificationResult",
     "WorkspaceSymbolGrounder",
+    "__version__",
+    "create_http_server",
     "get_benchmark_scenarios",
     "run_benchmark_suite",
+    "serve_http",
 ]

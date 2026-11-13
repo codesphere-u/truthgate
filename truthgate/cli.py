@@ -1,4 +1,4 @@
-"""Command-Line Interface for TruthGate (demo, verify, ground, benchmark, rules, mcp)."""
+"""Command-Line Interface for TruthGate (demo, verify, ground, benchmark, rules, mcp, serve-http)."""
 
 from __future__ import annotations
 
@@ -8,9 +8,14 @@ import sys
 import tempfile
 from pathlib import Path
 
-from truthgate.benchmark import _build_benchmark_sources, _populate_benchmark_workspace, run_benchmark_suite
+from truthgate.benchmark import (
+    _build_benchmark_sources,
+    _populate_benchmark_workspace,
+    run_benchmark_suite,
+)
 from truthgate.corrector import TruthGateVerifier
 from truthgate.grounding import WorkspaceSymbolGrounder
+from truthgate.http_server import DEFAULT_MAX_BODY_BYTES, serve_http
 from truthgate.mcp_server import TruthGateMCPServer
 from truthgate.models import RULES, SourceDocument
 
@@ -161,6 +166,15 @@ def _cmd_mcp(_args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_serve_http(args: argparse.Namespace) -> int:
+    serve_http(
+        host=args.host,
+        port=args.port,
+        max_body_bytes=args.max_body_bytes,
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="truthgate",
@@ -198,6 +212,20 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_mcp = sub.add_parser("mcp", help="Start the JSON-RPC 2.0 Stdio MCP server.")
     p_mcp.set_defaults(func=_cmd_mcp)
+
+    p_http = sub.add_parser(
+        "serve-http",
+        help="Start the zero-dependency HTTP/SSE MCP server and Developer Workbench.",
+    )
+    p_http.add_argument("--host", default="127.0.0.1", help="Bind host (default: 127.0.0.1).")
+    p_http.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000).")
+    p_http.add_argument(
+        "--max-body-bytes",
+        type=int,
+        default=DEFAULT_MAX_BODY_BYTES,
+        help=f"Max HTTP request body size in bytes (default: {DEFAULT_MAX_BODY_BYTES}).",
+    )
+    p_http.set_defaults(func=_cmd_serve_http)
 
     return parser
 

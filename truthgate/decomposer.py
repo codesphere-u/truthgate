@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+
 from truthgate.models import AtomicClaim, CodeReference, NumericToken
 
 STOPWORDS: frozenset[str] = frozenset(

@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+
 import pytest
 
 from truthgate.benchmark import (
-     BenchmarkScenario,
+    BenchmarkScenario,
     _build_benchmark_sources,
     _populate_benchmark_workspace,
     get_benchmark_scenarios,

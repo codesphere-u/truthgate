@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import time
 from pathlib import Path
+
 from truthgate.decomposer import ClaimDecomposer
 from truthgate.entailment import CitationEntailmentVerifier
 from truthgate.grounding import WorkspaceSymbolGrounder

@@ -6,8 +6,15 @@ import ast
 import os
 import re
 from pathlib import Path
+
 from truthgate.decomposer import ClaimDecomposer
-from truthgate.models import AtomicClaim, ClaimVerdict, CodeReference, GroundingReport, VerdictStatus
+from truthgate.models import (
+    AtomicClaim,
+    ClaimVerdict,
+    CodeReference,
+    GroundingReport,
+    VerdictStatus,
+)
 
 _NON_PY_SYMBOL_PATTERNS: tuple[re.Pattern[str], ...] = (
     # TypeScript / JavaScript: function foo, class Bar, const baz =, export interface Qux
@@ -231,22 +238,21 @@ class WorkspaceSymbolGrounder:
                 )
 
         # Rule TG008: Phantom Code Symbol
-        if ref.symbol:
-            if not self._symbol_exists(ref.symbol, file_syms):
-                sym_list = sorted(file_syms)
-                return ClaimVerdict(
-                    claim_id=ref_id,
-                    claim_text=claim_text,
-                    status=VerdictStatus.BROKEN_CODE_REF.value,
-                    confidence=1.0,
-                    explanation=(
-                        f"TG008 Phantom Code Symbol: Symbol '{ref.symbol}' does not exist in "
-                        f"'{ref.file_path}' AST (available symbols in {ref.file_path}: {sym_list})."
-                    ),
-                    matched_span=f"Available symbols in {ref.file_path}: {', '.join(sym_list)}",
-                    violation_code="TG008",
-                    source_id=ref.file_path,
-                )
+        if ref.symbol and not self._symbol_exists(ref.symbol, file_syms):
+            sym_list = sorted(file_syms)
+            return ClaimVerdict(
+                claim_id=ref_id,
+                claim_text=claim_text,
+                status=VerdictStatus.BROKEN_CODE_REF.value,
+                confidence=1.0,
+                explanation=(
+                    f"TG008 Phantom Code Symbol: Symbol '{ref.symbol}' does not exist in "
+                    f"'{ref.file_path}' AST (available symbols in {ref.file_path}: {sym_list})."
+                ),
+                matched_span=f"Available symbols in {ref.file_path}: {', '.join(sym_list)}",
+                violation_code="TG008",
+                source_id=ref.file_path,
+            )
 
         # Reference is completely grounded!
         span_preview = f"{ref.file_path} (lines: 1..{line_count})"

@@ -4,8 +4,15 @@ from __future__ import annotations
 
 import math
 import re
+
 from truthgate.decomposer import ClaimDecomposer
-from truthgate.models import AtomicClaim, ClaimVerdict, NumericToken, SourceDocument, VerdictStatus
+from truthgate.models import (
+    AtomicClaim,
+    ClaimVerdict,
+    NumericToken,
+    SourceDocument,
+    VerdictStatus,
+)
 
 EXPLICIT_NEGATIONS: frozenset[str] = frozenset(
     {

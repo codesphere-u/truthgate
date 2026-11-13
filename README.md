@@ -203,6 +203,29 @@ Built by **Akandwanaho Ivan Alvin** ([`@codesphere-u`](https://github.com/codesp
 - [`codesphere-u/patchpilot`](https://github.com/codesphere-u/patchpilot) — Autonomous Code Repair Engine & Anti-Reward-Hacking Patch Verifier
 - [`codesphere-u/truthgate`](https://github.com/codesphere-u/truthgate) — Deterministic Agent Hallucination Auditor, Citation-Span Entailment Verifier & Workspace Symbol Grounding Engine
 
+## HTTP/SSE Server, Portal & Docker Deployment
+
+TruthGate also ships with an interactive Developer Workbench & Portal, Streamable HTTP + SSE MCP gateway (`/mcp`), REST API, Prometheus/JSON telemetry, and Vercel ASGI entrypoint ([`api/index.py`](api/index.py)):
+
+```bash
+# Start the interactive portal + HTTP/SSE MCP server on http://127.0.0.1:8000
+truthgate serve-http --host 127.0.0.1 --port 8000
+
+# Run the live HTTP + MCP smoke test
+python scripts/smoke_test.py
+
+# Build and run the non-root production container
+docker build -t truthgate .
+docker run --rm -p 8000:8000 truthgate
+```
+
+Exposed HTTP endpoints:
+- `GET /` — Interactive TruthGate Workbench UI
+- `GET` / `HEAD /health`, `/healthz`, `/readyz` — Readiness and liveness probes
+- `GET /metrics` — Prometheus text or JSON telemetry (`?format=json`)
+- `POST /mcp` (Streamable HTTP) & `GET /mcp` (SSE or HTTP `405` JSON-RPC) — MCP tools, resources, and prompts
+- `GET /api/rules`, `GET /api/demo`, `GET /api/benchmark` & `POST /api/verify`, `POST /api/ground`, `POST /api/decompose` — REST verification endpoints
+
 ## License
 
 MIT License — see [LICENSE](LICENSE).
