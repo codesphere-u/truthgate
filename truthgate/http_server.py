@@ -1152,6 +1152,19 @@ class _TruthGateRequestHandler(BaseHTTPRequestHandler):
     def log_message(self, format: str, *args: Any) -> None:
         return
 
+    def send_error(self, code: int, message: str | None = None, explain: str | None = None) -> None:
+        _ = explain
+        self.close_connection = True
+        req_id = sanitize_request_id(None)
+        resp = self.server.app._json_response(
+            code,
+            {"error": message or "HTTP Error", "code": code},
+            "/",
+            req_id,
+            extra_headers={"Connection": "close"},
+        )
+        self._write_response(resp, send_body=self.command != "HEAD")
+
     def _read_request_body(self) -> tuple[bytes, HTTPResponse | None]:
         header_map = {k: v for k, v in self.headers.items()}
         req_id = sanitize_request_id(_get_header(header_map, "x-request-id"))
@@ -1159,17 +1172,20 @@ class _TruthGateRequestHandler(BaseHTTPRequestHandler):
         try:
             content_len = parse_content_length(header_map)
         except BadRequestError as exc:
+            self.close_connection = True
             err_resp = self.server.app._json_response(
                 HTTPStatus.BAD_REQUEST,
                 {"error": "Bad Request", "code": 400, "detail": str(exc)},
                 path,
                 req_id,
+                extra_headers={"Connection": "close"},
             )
             return b"", err_resp
 
         if content_len is None:
             return b"", None
         if content_len > self.server.app.max_body_bytes:
+            self.close_connection = True
             err_resp = self.server.app._json_response(
                 HTTPStatus.REQUEST_ENTITY_TOO_LARGE,
                 {
@@ -1179,6 +1195,7 @@ class _TruthGateRequestHandler(BaseHTTPRequestHandler):
                 },
                 path,
                 req_id,
+                extra_headers={"Connection": "close"},
             )
             return b"", err_resp
         return self.rfile.read(content_len), None

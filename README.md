@@ -165,6 +165,37 @@ truthgate ground \
 
 # 6. Start the JSON-RPC 2.0 Stdio MCP server
 truthgate mcp
+
+# 7. Start the zero-dependency HTTP/SSE MCP server & Dark-Mode Developer Workbench UI
+truthgate serve-http --host 127.0.0.1 --port 8000
+```
+
+---
+
+## HTTP Server, Developer Workbench & Streamable MCP
+
+TruthGate includes a **zero-dependency HTTP server** (`truthgate serve-http`) and an optional **FastAPI ASGI / Vercel entrypoint** (`api/index.py` via `pip install -e ".[server]"`):
+
+- **`GET /`**: Interactive dark-mode **TruthGate Developer Workbench** HTML UI (citation/hallucination auditor, surgical repair prompt viewer, rule matrix, and 40-scenario benchmark runner) when `Accept: text/html`; JSON service metadata otherwise.
+- **`GET` & `HEAD` Health/Telemetry**: `/health`, `/healthz`, `/readyz`, `/info`, and `/metrics` (Prometheus exposition text or JSON via `Accept: application/json` / `?format=json`).
+- **Streamable HTTP / SSE MCP**: `POST /mcp`, `GET /mcp` (SSE on `Accept: text/event-stream`, `405 Allow: POST, OPTIONS` otherwise), and `POST /messages`.
+- **Domain REST API**: `GET /api/rules`, `POST /api/verify`, `POST /api/ground`, `POST /api/decompose`, `GET|POST /api/demo`, and `GET|POST /api/benchmark`.
+- **Production Hardening**: `X-Request-ID` echo & sanitization, security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy`, `Cache-Control: no-store` on `/api/*`), `OPTIONS` CORS preflight, `413` body size guard, `-32700` malformed JSON handling, and zero traceback leaks.
+
+### Docker & Smoke Verification
+
+```bash
+# Build and run the hardened non-root container
+docker build -t truthgate:latest .
+docker run --rm -p 8000:8000 truthgate:latest
+
+# Run end-to-end HTTP, MCP, security-header, and REST smoke verification
+python scripts/smoke_test.py
+
+# Quality & typing checks (PEP 561 py.typed included)
+ruff check .
+mypy truthgate api scripts
+pytest -v --cov=truthgate --cov-fail-under=90
 ```
 
 ---
@@ -184,11 +215,14 @@ Add `truthgate` to your Claude Desktop, Cursor, or Antigravity `mcp_config.json`
 }
 ```
 
-### Exposed MCP Tools
-1. **`truthgate_verify_response`**: Verifies an agent response against source documents and an optional workspace directory, returning claim-by-claim verdicts and a surgical repair prompt.
-2. **`truthgate_ground_workspace_refs`**: Verifies all file paths, `#Lstart-Lend` line ranges, and AST symbols referenced in markdown text against a workspace directory.
-3. **`truthgate_list_rules`**: Lists all 8 deterministic verification rules (`TG001`–`TG008`).
-4. **`truthgate_run_benchmark`**: Runs the reproducible 40-scenario benchmark suite.
+### Exposed MCP Capabilities
+- **Tools (`tools/list`, `tools/call`)**:
+  1. **`truthgate_verify_response`**: Verifies an agent response against source documents and an optional workspace directory, returning claim-by-claim verdicts and a surgical repair prompt.
+  2. **`truthgate_ground_workspace_refs`**: Verifies all file paths, `#Lstart-Lend` line ranges, and AST symbols referenced in markdown text against a workspace directory.
+  3. **`truthgate_list_rules`**: Lists all 8 deterministic verification rules (`TG001`–`TG008`).
+  4. **`truthgate_run_benchmark`**: Runs the reproducible 40-scenario benchmark suite.
+- **Resources (`resources/list`, `resources/read`)**: `truthgate://rules`, `truthgate://benchmark/scenarios`, `truthgate://docs/architecture`.
+- **Prompts (`prompts/list`, `prompts/get`)**: `audit-response`, `ground-workspace`, `surgical-repair`.
 
 ---
 

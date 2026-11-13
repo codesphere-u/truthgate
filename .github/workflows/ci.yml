@@ -28,21 +28,24 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install package and dev tools
+      - name: Install package and test dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[dev]" ruff mypy httpx fastapi
+          python -m pip install -e ".[dev]"
 
-      - name: Run Ruff lint & Mypy type check
+      - name: Run Ruff lint checks
+        run: ruff check .
+
+      - name: Run Mypy static type checks
+        run: mypy truthgate api scripts
+
+      - name: Run pytest suite with 90% coverage gate
+        run: pytest -v --cov=truthgate --cov-report=term-missing --cov-fail-under=90
+
+      - name: Run CLI & HTTP smoke checks
         run: |
-          ruff check .
-          mypy truthgate api
-
-      - name: Run pytest suite with coverage gate
-        run: pytest -v --cov=truthgate --cov-report=term-missing --cov-fail-under=85
-
-      - name: Run end-to-end verification and repair demo
-        run: truthgate demo
-
-      - name: Run reproducible 40-scenario benchmark suite
-        run: truthgate benchmark
+          truthgate demo
+          truthgate benchmark
+          truthgate rules
+          truthgate serve-http --help
+          python scripts/smoke_test.py

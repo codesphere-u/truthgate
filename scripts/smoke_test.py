@@ -33,7 +33,8 @@ def _request(
 def run_smoke_test() -> None:
     """Boot TruthGate HTTP server on an ephemeral port and verify core contracts."""
     server = create_http_server(host="127.0.0.1", port=0, max_body_bytes=4096)
-    host, port = server.server_address[:2]
+    raw_host, port = server.server_address[:2]
+    host = raw_host.decode("utf-8") if isinstance(raw_host, (bytes, bytearray)) else str(raw_host)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
 
