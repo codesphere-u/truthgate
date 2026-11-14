@@ -2,6 +2,17 @@
 
 All notable changes to `truthgate` are documented in this file.
 
+## [1.1.0] - 2026-11-14
+
+### Added
+- Dedicated Warm Ivory multi-page static website (`website/`, live at `https://codesphere-u.github.io/truthgate/`) with Azure Verification Blue (`#38bdf8`) and Emerald Entailment (`#34d399`) accents.
+- Browser-local Interactive Studio (`website/studio.html`) with live citation entailment auditor, surgical repair compiler, workspace AST symbol simulator, and MCP config generator.
+- Verified 40-scenario benchmark proof page (`website/proof.html`), filterable `TG001`–`TG008` rules explorer (`website/rules.html`), and sticky-rail documentation (`website/docs.html`).
+- Machine discovery endpoints (`llms.txt`, `llms-full.txt`, `sitemap.xml`, `robots.txt`), Schema.org `@graph` JSON-LD, repository guides (`docs/`), GitHub Pages workflow (`.github/workflows/pages.yml`), and automated website tests (`tests/test_website_and_docs.py`).
+
+### Changed
+- Bumped package, CLI, MCP server, and HTTP workbench version to `1.1.0`.
+
 ## [1.0.0] - 2026-11-07
 
 ### Added

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#fffdf2"/>
+  <rect x="44" y="44" width="1112" height="542" rx="28" fill="#fbf8eb" stroke="#1e1b18" stroke-opacity="0.14" stroke-width="3"/>
+
+  <!-- Azure Verification Crest Mascot -->
+  <g transform="translate(88 128)">
+    <path d="M108 16L194 46v60c0 54-37 97-86 113-49-16-86-59-86-113V46l86-30Z" fill="#38bdf8" stroke="#1e1b18" stroke-width="6" stroke-linejoin="round"/>
+    <rect x="52" y="68" width="112" height="84" rx="22" fill="#fffdf2" stroke="#1e1b18" stroke-width="5"/>
+    <circle cx="86" cy="102" r="14" fill="#34d399" stroke="#1e1b18" stroke-width="4"/>
+    <circle cx="130" cy="102" r="14" fill="#34d399" stroke="#1e1b18" stroke-width="4"/>
+    <path d="M84 132h48M94 132l12 10 18-16" stroke="#1e1b18" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="176" cy="36" r="18" fill="#34d399" stroke="#1e1b18" stroke-width="4.5"/>
+  </g>
+
+  <text x="348" y="182" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="68" font-weight="800" letter-spacing="-1.8" fill="none" stroke="#1e1b18" stroke-width="9" stroke-linejoin="round">TruthGate</text>
+  <text x="348" y="182" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="68" font-weight="800" letter-spacing="-1.8" fill="#38bdf8">TruthGate</text>
+
+  <text x="348" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="33" font-weight="700" fill="#1e1b18">Deterministic Hallucination &amp; Grounding Auditor.</text>
+  <text x="348" y="294" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="500" fill="#4b433b">TG001–TG008 checks · 100.0% F1 on 40 scenarios · 0.128 ms P50 latency</text>
+
+  <rect x="348" y="344" width="236" height="62" rx="14" fill="#38bdf8" stroke="#1e1b18" stroke-width="2.5"/>
+  <text x="466" y="383" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#082f49">100.0% Recall</text>
+
+  <rect x="604" y="344" width="236" height="62" rx="14" fill="#34d399" stroke="#1e1b18" stroke-width="2.5"/>
+  <text x="722" y="383" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#064e3b">0.128 ms P50</text>
+
+  <rect x="860" y="344" width="244" height="62" rx="14" fill="#fffdf2" stroke="#1e1b18" stroke-width="2.5"/>
+  <text x="982" y="383" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#1e1b18">MCP + Surgical Fix</text>
+
+  <rect x="348" y="438" width="756" height="72" rx="14" fill="#f6f2e2" stroke="#1e1b18" stroke-opacity="0.18" stroke-width="2"/>
+  <text x="376" y="482" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="600" fill="#1e1b18">$ pip install git+https://github.com/codesphere-u/truthgate.git &amp;&amp; truthgate demo</text>
+</svg>

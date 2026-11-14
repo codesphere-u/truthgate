@@ -1,11 +1,21 @@
+<div align="center">
+
 # TruthGate (`codesphere-u/truthgate`)
 
 [![CI](https://github.com/codesphere-u/truthgate/actions/workflows/ci.yml/badge.svg)](https://github.com/codesphere-u/truthgate/actions/workflows/ci.yml)
+[![Website](https://img.shields.io/badge/website-live-38bdf8.svg)](https://codesphere-u.github.io/truthgate/)
+[![Release](https://img.shields.io/badge/release-v1.1.0-34d399.svg)](https://github.com/codesphere-u/truthgate/releases/tag/v1.1.0)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
-[![MCP Compatible](https://img.shields.io/badge/MCP-JSON--RPC%202.0-purple.svg)](#mcp-server-integration)
+[![MCP Compatible](https://img.shields.io/badge/MCP-JSON--RPC%202.0-0369a1.svg)](#mcp-server-integration)
 
 **Deterministic Agent Hallucination Auditor, Citation-Span Entailment Verifier & Workspace Symbol Grounding Engine (with MCP Server)**
+
+[**Website**](https://codesphere-u.github.io/truthgate/) &bull; [**Interactive Studio**](https://codesphere-u.github.io/truthgate/studio.html) &bull; [**40-Scenario Benchmark**](https://codesphere-u.github.io/truthgate/proof.html) &bull; [**Rules (TG001&ndash;TG008)**](https://codesphere-u.github.io/truthgate/rules.html) &bull; [**Docs**](https://codesphere-u.github.io/truthgate/docs.html)
+
+</div>
+
+See also [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) and [docs/MCP_AND_HTTP_SERVER.md](docs/MCP_AND_HTTP_SERVER.md).
 
 ---
 

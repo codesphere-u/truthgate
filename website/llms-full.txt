@@ -1,0 +1,36 @@
+# TruthGate v1.1.0 — Full Reference for AI Assistants & Coding Agents
+
+TruthGate audits LLM agent responses against cited RAG source documents and actual workspace AST symbol tables without calling a second LLM.
+
+## Canonical URLs
+- Home: https://codesphere-u.github.io/truthgate/
+- Studio: https://codesphere-u.github.io/truthgate/studio.html
+- Benchmark: https://codesphere-u.github.io/truthgate/proof.html
+- Rules: https://codesphere-u.github.io/truthgate/rules.html
+- Docs: https://codesphere-u.github.io/truthgate/docs.html
+
+## Quick Commands
+```bash
+pip install git+https://github.com/codesphere-u/truthgate.git
+truthgate demo
+truthgate benchmark
+truthgate rules
+truthgate verify --response "..." --sources-json sources.json --workspace . --fail-on-violation
+truthgate ground --response "..." --workspace .
+truthgate mcp
+truthgate serve-http --host 127.0.0.1 --port 8000
+```
+
+## MCP Tools (`truthgate mcp` / `/mcp`)
+- `truthgate_verify_response` — Evaluates `TG001`–`TG008` and compiles `repair_prompt`.
+- `truthgate_ground_workspace_refs` — Validates paths, `#Lstart-Lend` bounds, and Python/TS/JS/Go/Rust AST symbols.
+- `truthgate_list_rules` — Returns machine-readable definitions of `TG001`–`TG008`.
+- `truthgate_run_benchmark` — Runs the 40-scenario benchmark suite.
+- Resources: `truthgate://rules`, `truthgate://benchmark/scenarios`, `truthgate://docs/architecture`.
+- Prompts: `audit-response`, `ground-workspace`, `surgical-repair`.
+
+## HTTP & ASGI Endpoints
+- `GET /` — Interactive Developer Workbench UI (`Accept: text/html`) or JSON metadata.
+- `GET /health`, `/healthz`, `/readyz`, `/info`, `/metrics` (Prometheus or JSON).
+- `POST /mcp`, `GET /mcp` (SSE), `POST /messages`.
+- `GET /api/rules`, `/api/demo`, `/api/benchmark` & `POST /api/verify`, `/api/ground`, `/api/decompose`.

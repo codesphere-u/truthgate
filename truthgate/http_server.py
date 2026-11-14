@@ -35,7 +35,7 @@ from truthgate.models import RULES, SourceDocument
 
 DEFAULT_MAX_BODY_BYTES = 1_048_576
 _REQUEST_ID_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
-_VERSION = "1.0.0"
+_VERSION = "1.1.0"
 
 
 class PayloadTooLargeError(ValueError):
@@ -335,7 +335,7 @@ def _render_workbench_html() -> str:
   <header>
     <div class="brand">
       <h1>TruthGate</h1>
-      <span class="badge">v1.0.0</span>
+      <span class="badge">v1.1.0</span>
       <span class="badge ok" id="health-pill">Checking /health...</span>
     </div>
     <div class="row" style="margin-top:0">

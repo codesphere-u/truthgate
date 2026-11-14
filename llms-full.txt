@@ -1,0 +1,18 @@
+# TruthGate v1.1.0 — Repository Documentation for Agents
+
+TruthGate audits LLM agent responses against cited RAG source documents and workspace AST symbols deterministically in `0.128 ms` P50 (`P95 = 0.347 ms`) with zero external core dependencies.
+
+## Guides
+- Getting Started: `docs/GETTING_STARTED.md`
+- MCP & HTTP Server: `docs/MCP_AND_HTTP_SERVER.md`
+- Website: https://codesphere-u.github.io/truthgate/
+
+## Verification Rules (`TG001`–`TG008`)
+- `TG001` Phantom Source Citation (`CRITICAL`)
+- `TG002` Low Lexical/Entity Support (`HIGH`)
+- `TG003` Negation Polarity Inversion (`CRITICAL`)
+- `TG004` Numeric & Magnitude Drift (`CRITICAL`)
+- `TG005` Uncited Factual Assertion (`MEDIUM`)
+- `TG006` Non-Existent File Path (`CRITICAL`)
+- `TG007` Out-of-Bounds Line Range (`HIGH`)
+- `TG008` Phantom Code Symbol (`CRITICAL`)

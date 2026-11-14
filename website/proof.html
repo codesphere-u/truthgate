@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>40-Scenario Benchmark Proof — TruthGate</title>
+  <meta name="description" content="Reproducible 40-scenario benchmark results for TruthGate: 100.0% precision, 100.0% recall, 0.0% false positive rate, and 0.128 ms P50 latency.">
+  <link rel="canonical" href="https://codesphere-u.github.io/truthgate/proof.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#38bdf8">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="TruthGate Benchmark Proof — 100.0% Precision &amp; 0.128 ms P50">
+  <meta property="og:description" content="Every TG001–TG008 scenario result from truthgate benchmark verified offline on Python 3.12.">
+  <meta property="og:url" content="https://codesphere-u.github.io/truthgate/proof.html">
+  <meta property="og:image" content="https://codesphere-u.github.io/truthgate/og-image.svg">
+
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "TruthGate 40-Scenario Benchmark Proof",
+    "url": "https://codesphere-u.github.io/truthgate/proof.html",
+    "author": { "@id": "https://codesphere-u.github.io/truthgate/#org" },
+    "isPartOf": { "@id": "https://codesphere-u.github.io/truthgate/#website" }
+  }
+  </script>
+</head>
+<body data-analytics="plausible">
+  <div class="page-col">
+    <header class="site-header">
+      <a class="brand-link" href="index.html" aria-label="TruthGate Home">
+        <svg class="brand-wordmark-svg" viewBox="0 0 196 36" width="196" height="36" role="img" aria-label="TruthGate">
+          <path d="M16 4L28 8.5v8.5c0 7.5-5.1 13.4-12 15.6-6.9-2.2-12-8.1-12-15.6V8.5L16 4Z" fill="#38bdf8" stroke="#1e1b18" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M11 17.5l3.8 3.8 6.8-7" stroke="#fffdf2" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="36" y="25.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23.5" font-weight="800" letter-spacing="-0.6" fill="none" stroke="#1e1b18" stroke-width="4.2" stroke-linejoin="round">TruthGate</text>
+          <text x="36" y="25.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23.5" font-weight="800" letter-spacing="-0.6" fill="#38bdf8">TruthGate</text>
+        </svg>
+      </a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="studio.html">Studio</a>
+        <a class="active" href="proof.html">Benchmark</a>
+        <a href="rules.html">Rules</a>
+        <a href="docs.html">Docs</a>
+        <a class="icon-link" href="https://github.com/codesphere-u/truthgate" aria-label="TruthGate on GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a10.9 10.9 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a class="nav-pill" href="docs.html#install">Install</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <h1>40-Scenario Benchmark Proof</h1>
+        <p class="hero-sub">Measured directly with <code>truthgate benchmark</code> across 10 grounded responses and 30 adversarial hallucination cases.</p>
+      </section>
+
+      <section aria-labelledby="suite-summary">
+        <h2 class="sec-title" id="suite-summary">Summary Metrics</h2>
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Observed Value</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Total Scenarios</td><td><strong>40</strong></td><td>10 Grounded Truthful + 30 Adversarial Hallucinations</td></tr>
+              <tr><td>Precision / Recall / F1</td><td><span class="pill pill-good">100.0% / 100.0% / 100.0%</span></td><td>30/30 True Positives, 10/10 True Negatives</td></tr>
+              <tr><td>False Positive Rate</td><td><span class="pill pill-good">0.0%</span></td><td>0/10 truthful RAG &amp; coding claims flagged</td></tr>
+              <tr><td>Exact Rule Accuracy</td><td><span class="pill pill-azure">100.0% (40/40)</span></td><td>Exact rule code attribution across TG001&ndash;TG008</td></tr>
+              <tr><td>Verification Latency</td><td><span class="pill pill-mint">0.128 ms P50 / 0.347 ms P95</span></td><td>Deterministic CPU execution with zero network requests</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="per-rule">
+        <h2 class="sec-title" id="per-rule">Per-Rule Breakdown (TG001&ndash;TG008)</h2>
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Scenarios Caught</th>
+                <th>Exact Code Match</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>TG001</code></td><td>4 / 4</td><td>4 / 4</td><td><span class="pill pill-azure">entailment</span></td></tr>
+              <tr><td><code>TG002</code></td><td>4 / 4</td><td>4 / 4</td><td><span class="pill pill-azure">entailment</span></td></tr>
+              <tr><td><code>TG003</code></td><td>5 / 5</td><td>5 / 5</td><td><span class="pill pill-azure">entailment</span></td></tr>
+              <tr><td><code>TG004</code></td><td>5 / 5</td><td>5 / 5</td><td><span class="pill pill-azure">entailment</span></td></tr>
+              <tr><td><code>TG005</code></td><td>3 / 3</td><td>3 / 3</td><td><span class="pill pill-azure">entailment</span></td></tr>
+              <tr><td><code>TG006</code></td><td>3 / 3</td><td>3 / 3</td><td><span class="pill pill-mint">workspace_grounding</span></td></tr>
+              <tr><td><code>TG007</code></td><td>3 / 3</td><td>3 / 3</td><td><span class="pill pill-mint">workspace_grounding</span></td></tr>
+              <tr><td><code>TG008</code></td><td>3 / 3</td><td>3 / 3</td><td><span class="pill pill-mint">workspace_grounding</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="repro-cmd">
+        <h2 class="sec-title" id="repro-cmd">Reproduce Locally</h2>
+        <div class="doc-codeblock">
+          <pre><span class="syn-cmd">truthgate</span> <span class="syn-arg">benchmark</span>
+<span class="syn-cmd">truthgate</span> <span class="syn-arg">benchmark --json</span></pre>
+          <button class="copy-icon-btn" type="button" data-copy-target="pre" aria-label="Copy benchmark commands">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="index.html">Home</a> &middot;
+        <a href="studio.html">Studio</a> &middot;
+        <a href="rules.html">Rules</a> &middot;
+        <a href="docs.html">Docs</a> &middot;
+        <a href="llms.txt">llms.txt</a> &middot;
+        <a href="https://github.com/codesphere-u/truthgate">GitHub</a> &middot;
+        <a href="https://github.com/codesphere-u/truthgate/releases/tag/v1.1.0">v1.1.0</a>
+      </div>
+      <div>Privacy-friendly analytics via Plausible &middot; MIT License &middot; <a href="https://github.com/codesphere-u">codesphere-u</a></div>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

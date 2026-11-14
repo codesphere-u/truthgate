@@ -217,7 +217,7 @@ class TruthGateMCPServer:
                     "protocolVersion": MCP_PROTOCOL_VERSION,
                     "serverInfo": {
                         "name": "truthgate-mcp",
-                        "version": "1.0.0",
+                        "version": "1.1.0",
                     },
                     "capabilities": {
                         "tools": {"listChanged": False},

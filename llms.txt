@@ -1,0 +1,11 @@
+# TruthGate
+
+> Deterministic Agent Hallucination Auditor, Citation-Span Entailment Verifier & Workspace Symbol Grounding Engine (with Stdio & Streamable HTTP MCP Server).
+
+- Website: https://codesphere-u.github.io/truthgate/
+- Interactive Studio: https://codesphere-u.github.io/truthgate/studio.html
+- 40-Scenario Benchmark: https://codesphere-u.github.io/truthgate/proof.html
+- Rules Reference (TG001–TG008): https://codesphere-u.github.io/truthgate/rules.html
+- Documentation: https://codesphere-u.github.io/truthgate/docs.html
+- Full LLM Context: https://codesphere-u.github.io/truthgate/llms-full.txt
+- Source & Releases: https://github.com/codesphere-u/truthgate

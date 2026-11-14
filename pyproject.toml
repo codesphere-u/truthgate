@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "truthgate"
-version = "1.0.0"
+version = "1.1.0"
 description = "Deterministic Agent Hallucination Auditor, Citation-Span Entailment Verifier & Workspace Symbol Grounding Engine (with MCP Server)."
 readme = "README.md"
 license = { text = "MIT" }
@@ -52,7 +52,8 @@ dev = [
 truthgate = "truthgate.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/codesphere-u/truthgate"
+Homepage = "https://codesphere-u.github.io/truthgate/"
+Documentation = "https://codesphere-u.github.io/truthgate/docs.html"
 Repository = "https://github.com/codesphere-u/truthgate"
 Issues = "https://github.com/codesphere-u/truthgate/issues"
 

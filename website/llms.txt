@@ -1,0 +1,25 @@
+# TruthGate
+
+> Deterministic Agent Hallucination Auditor, Citation-Span Entailment Verifier & Workspace Symbol Grounding Engine (with Stdio & Streamable HTTP MCP Server).
+
+- Website: https://codesphere-u.github.io/truthgate/
+- Interactive Studio: https://codesphere-u.github.io/truthgate/studio.html
+- 40-Scenario Benchmark: https://codesphere-u.github.io/truthgate/proof.html
+- Rules Reference (TG001–TG008): https://codesphere-u.github.io/truthgate/rules.html
+- Documentation: https://codesphere-u.github.io/truthgate/docs.html
+- Full LLM Context: https://codesphere-u.github.io/truthgate/llms-full.txt
+- Source & Releases: https://github.com/codesphere-u/truthgate
+
+## Verified Benchmark Summary
+- 40 Scenarios (10 Grounded + 30 Adversarial): `100.0%` Precision, `100.0%` Recall, `100.0%` F1, `0.0%` False Positive Rate.
+- P50 Verification Latency: `0.128 ms` (`P95 = 0.347 ms`).
+
+## Rules (TG001–TG008)
+- `TG001` Phantom Source Citation (`CRITICAL`)
+- `TG002` Low Lexical/Entity Support (`HIGH`)
+- `TG003` Negation Polarity Inversion (`CRITICAL`)
+- `TG004` Numeric & Magnitude Drift (`CRITICAL`)
+- `TG005` Uncited Factual Assertion (`MEDIUM`)
+- `TG006` Non-Existent File Path (`CRITICAL`)
+- `TG007` Out-of-Bounds Line Range (`HIGH`)
+- `TG008` Phantom Code Symbol (`CRITICAL`)

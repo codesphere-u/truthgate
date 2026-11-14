@@ -44,7 +44,7 @@ def _cmd_demo(args: argparse.Namespace) -> int:
         return 0
 
     print("=" * 84)
-    print("TRUTHGATE v1.0.0 — DETERMINISTIC AGENT HALLUCINATION & GROUNDING AUDIT DEMO")
+    print("TRUTHGATE v1.1.0 — DETERMINISTIC AGENT HALLUCINATION & GROUNDING AUDIT DEMO")
     print("=" * 84)
     print("\n[Agent Response Under Audit]")
     print(f"  {flawed_response}\n")

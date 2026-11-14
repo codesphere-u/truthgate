@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TruthGate — Deterministic Agent Hallucination &amp; AST Grounding Gate</title>
+  <meta name="description" content="Catch phantom citations, negation polarity flips, numeric drift, and nonexistent code symbols in 0.128 ms with zero LLM judge calls or dependencies.">
+  <meta name="keywords" content="TruthGate, hallucination detection, citation verification, negation inversion, numeric drift, workspace AST grounding, MCP server, Python verifier">
+  <link rel="canonical" href="https://codesphere-u.github.io/truthgate/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#38bdf8">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TruthGate — Deterministic Citation &amp; Symbol Verification Gate">
+  <meta property="og:description" content="8 deterministic checks (TG001–TG008) catching agent hallucinations and compiling surgical repair prompts in 0.128 ms P50.">
+  <meta property="og:url" content="https://codesphere-u.github.io/truthgate/">
+  <meta property="og:image" content="https://codesphere-u.github.io/truthgate/og-image.svg">
+  <meta property="og:image:alt" content="TruthGate v1.1.0 Azure Verification Shield mascot and 100.0% F1 benchmark summary">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TruthGate — Sub-Millisecond Agent Hallucination Auditor &amp; MCP Server">
+  <meta name="twitter:description" content="100.0% recall, 0.0% false positive rate across 40 scenarios. Zero external runtime dependencies.">
+  <meta name="twitter:image" content="https://codesphere-u.github.io/truthgate/og-image.svg">
+
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://codesphere-u.github.io/truthgate/#org",
+        "name": "CodeSphere",
+        "url": "https://github.com/codesphere-u",
+        "founder": {
+          "@type": "Person",
+          "@id": "https://codesphere-u.github.io/truthgate/#founder",
+          "name": "Akandwanaho Ivan Alvin",
+          "url": "https://github.com/codesphere-u"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://codesphere-u.github.io/truthgate/#website",
+        "url": "https://codesphere-u.github.io/truthgate/",
+        "name": "TruthGate",
+        "publisher": { "@id": "https://codesphere-u.github.io/truthgate/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://codesphere-u.github.io/truthgate/#software",
+        "name": "TruthGate",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "macOS, Linux, Windows",
+        "softwareVersion": "1.1.0",
+        "license": "https://opensource.org/license/mit",
+        "url": "https://codesphere-u.github.io/truthgate/",
+        "downloadUrl": "https://github.com/codesphere-u/truthgate/releases/tag/v1.1.0",
+        "publisher": { "@id": "https://codesphere-u.github.io/truthgate/#org" },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "featureList": [
+          "8 deterministic rules (TG001–TG008) for citation entailment and workspace AST grounding",
+          "Sub-millisecond verification (0.128 ms P50, 0.347 ms P95) with zero core dependencies",
+          "JSON-RPC 2.0 Stdio MCP and Streamable HTTP/SSE MCP server integration",
+          "Surgical self-correction prompt compiler for automated agent retry loops"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why use TruthGate instead of an LLM-as-a-Judge guardrail?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "LLM judges add 1–3 seconds of latency, extra API cost, and stochastic variance. TruthGate verifies citations, negation polarity inversions, numeric/currency drift, and workspace AST file/symbol references deterministically in 0.128 ms P50 with 100.0% precision and recall on the 40-scenario benchmark."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What rules does TruthGate check across text and code?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rules TG001–TG005 check phantom citations, IDF-weighted lexical/entity support, negation polarity flips, numeric/magnitude drift, and uncited factual assertions. Rules TG006–TG008 check workspace file paths, #Lstart-Lend line ranges, and Python AST or TS/JS/Go/Rust symbols."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does TruthGate work as an MCP Server and HTTP Workbench?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Run truthgate mcp for JSON-RPC 2.0 Stdio MCP or truthgate serve-http for Streamable HTTP/SSE MCP, REST endpoints, Prometheus metrics, and the browser Workbench UI."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-analytics="plausible">
+  <div class="page-col">
+    <header class="site-header">
+      <a class="brand-link" href="index.html" aria-label="TruthGate Home">
+        <svg class="brand-wordmark-svg" viewBox="0 0 196 36" width="196" height="36" role="img" aria-label="TruthGate">
+          <path d="M16 4L28 8.5v8.5c0 7.5-5.1 13.4-12 15.6-6.9-2.2-12-8.1-12-15.6V8.5L16 4Z" fill="#38bdf8" stroke="#1e1b18" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M11 17.5l3.8 3.8 6.8-7" stroke="#fffdf2" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="36" y="25.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23.5" font-weight="800" letter-spacing="-0.6" fill="none" stroke="#1e1b18" stroke-width="4.2" stroke-linejoin="round">TruthGate</text>
+          <text x="36" y="25.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23.5" font-weight="800" letter-spacing="-0.6" fill="#38bdf8">TruthGate</text>
+        </svg>
+      </a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="studio.html">Studio</a>
+        <a href="proof.html">Benchmark</a>
+        <a href="rules.html">Rules</a>
+        <a href="docs.html">Docs</a>
+        <a class="icon-link" href="https://github.com/codesphere-u/truthgate" aria-label="TruthGate on GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a10.9 10.9 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a class="nav-pill" href="docs.html#install">Install</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-duo" aria-labelledby="hero-title">
+        <div class="mascot-wrap">
+          <svg viewBox="0 0 144 144" role="img" aria-label="TruthGate Azure verification shield mascot">
+            <path d="M72 14L126 33v38c0 34-23 61-54 71-31-10-54-37-54-71V33l54-19Z" fill="#38bdf8" stroke="#1e1b18" stroke-width="4.5" stroke-linejoin="round"/>
+            <rect x="38" y="46" width="68" height="52" rx="14" fill="#fffdf2" stroke="#1e1b18" stroke-width="3.6"/>
+            <circle cx="58" cy="67" r="8.5" fill="#34d399" stroke="#1e1b18" stroke-width="3"/>
+            <circle cx="86" cy="67" r="8.5" fill="#34d399" stroke="#1e1b18" stroke-width="3"/>
+            <circle cx="60" cy="65" r="2" fill="#fffdf2"/>
+            <circle cx="88" cy="65" r="2" fill="#fffdf2"/>
+            <path d="M56 84l11 8 19-14" stroke="#1e1b18" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="118" cy="24" r="11" fill="#34d399" stroke="#1e1b18" stroke-width="3.2"/>
+          </svg>
+        </div>
+        <div class="hero-copy">
+          <h1 id="hero-title">Catch agent hallucinations before your users do.</h1>
+          <p class="hero-sub">Deterministic citation-span entailment, workspace AST symbol grounding, and surgical self-correction prompts in 0.128 ms P50 &mdash; zero LLM-as-a-Judge calls.</p>
+        </div>
+      </section>
+
+      <section class="cta-area" aria-label="Install TruthGate">
+        <div class="split-btn-group">
+          <button class="split-main" id="copy-main-cmd" type="button" data-copy="uvx --from git+https://github.com/codesphere-u/truthgate truthgate demo">
+            <strong>Try TruthGate CLI</strong>
+            <span>v1.1.0 &middot; Python 3.11+ &middot; Zero core runtime deps</span>
+          </button>
+          <button class="split-caret" id="cta-menu-btn" type="button" aria-label="Switch install command" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+        </div>
+        <div class="cmd-caption" id="main-cmd-caption">$ uvx --from git+https://github.com/codesphere-u/truthgate truthgate demo</div>
+
+        <div class="cta-popover" id="cta-popover" role="dialog" aria-label="Install options">
+          <div class="pop-tabs" role="tablist">
+            <button class="pop-tab active" type="button" data-pop-cmd="uvx --from git+https://github.com/codesphere-u/truthgate truthgate demo">uvx Demo</button>
+            <button class="pop-tab" type="button" data-pop-cmd="pip install git+https://github.com/codesphere-u/truthgate.git">pip</button>
+            <button class="pop-tab" type="button" data-pop-cmd="truthgate mcp">Stdio MCP</button>
+            <button class="pop-tab" type="button" data-pop-cmd="truthgate serve-http --host 127.0.0.1 --port 8000">HTTP Workbench</button>
+          </div>
+          <div class="pop-cmd">
+            <code id="pop-cmd-text">uvx --from git+https://github.com/codesphere-u/truthgate truthgate demo</code>
+            <button class="copy-icon-btn" id="pop-copy-btn" type="button" aria-label="Copy selected command">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="preview-frame" aria-label="TruthGate Audit Preview">
+        <div class="frame-bar">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="frame-tabs" role="tablist">
+            <button class="frame-tab active" type="button" data-preview="verdict">Audit Verdict</button>
+            <button class="frame-tab" type="button" data-preview="ast">Workspace AST</button>
+            <button class="frame-tab" type="button" data-preview="repair">Surgical Repair</button>
+          </div>
+          <a class="frame-open-link" href="studio.html">Open Studio &rarr;</a>
+        </div>
+        <div class="preview-body">
+          <div class="preview-pane" data-preview-pane="verdict">
+            <div class="score-row">
+              <div class="score-cell"><span>40-Scenario F1</span><strong>100.0%</strong></div>
+              <div class="score-cell"><span>False Positives</span><strong>0.0%</strong></div>
+              <div class="score-cell"><span>P50 Latency</span><strong>0.128 ms</strong></div>
+              <div class="score-cell"><span>P95 Latency</span><strong>0.347 ms</strong></div>
+            </div>
+            <p class="diag-note"><strong>Demo Run:</strong> <code>truthgate demo</code> audits 4 claims in <code>1.200 ms</code>, flagging <code>TG003</code> (polarity flip), <code>TG004</code> (<code>4.28 ms</code> vs <code>42.8 ms</code>), and <code>TG008</code> (missing <code>verify_token_v2()</code>).</p>
+          </div>
+          <div class="preview-pane" data-preview-pane="ast" hidden>
+            <div class="rw-list">
+              <div class="rw-item warn-border"><span>TG008 &middot; PHANTOM CODE SYMBOL &middot; CRITICAL</span><p>Symbol <code>verify_token_v2</code> not found in <code>src/auth/jwt.py</code> AST (available: <code>verify_token</code>, <code>decode_payload</code>, <code>TokenValidator</code>).</p></div>
+              <div class="rw-item"><span>TG007 &middot; OUT-OF-BOUNDS LINE RANGE &middot; HIGH</span><p>Prevents responses from citing <code>#L120-L150</code> on a 24-line file or non-existent paths (<code>TG006</code>).</p></div>
+            </div>
+          </div>
+          <div class="preview-pane" data-preview-pane="repair" hidden>
+            <div class="rw-list">
+              <div class="rw-item"><span>SURGICAL SELF-CORRECTION COMPILER</span><p><code>1. [TG003] Offending statement: "TLS 1.0 is permitted..." &rarr; Evidence: "TLS 1.0 is not permitted in production environments."</code></p></div>
+              <div class="rw-item"><span>VERBATIM NUMERIC FIX</span><p><code>2. [TG004] Claim reports '4.28 ms' vs source value [42.8 ms]. Rewrite using exact metric.</code></p></div>
+            </div>
+          </div>
+        </div>
+        <div class="preview-foot">
+          <span>Pure Python 3.11+ stdlib core &middot; Stdio &amp; HTTP/SSE MCP &middot; FastAPI ASGI adapter</span>
+          <span class="preview-foot-links">
+            <a href="studio.html">Try Live Auditor</a>
+            <a href="proof.html">40-Scenario Proof</a>
+          </span>
+        </div>
+      </section>
+
+      <section class="editorial-grid" aria-label="Core capabilities">
+        <div>
+          <h2>Catches Polarity Flips (TG003)</h2>
+          <p>Detects omitted negations and antonym swaps like <code>permitted</code> vs <code>prohibited</code> or <code>enabled</code> vs <code>disabled</code> against cited RAG sources.</p>
+        </div>
+        <div>
+          <h2>Stops Numeric Drift (TG004)</h2>
+          <p>Matches decimals, percentages, latencies, and multi-currency literals (<code>USD</code>, <code>UGX</code>, <code>EUR</code>, <code>ms</code>) verbatim before decimal shifts slip through.</p>
+        </div>
+        <div>
+          <h2>Grounds Files &amp; AST Symbols (TG006&ndash;TG008)</h2>
+          <p>Verifies referenced file paths, <code>#Lstart-Lend</code> line bounds, and Python AST / TS / JS / Go / Rust symbol tables directly against your repository.</p>
+        </div>
+        <div>
+          <h2>Compiles Surgical Fixes (0.128 ms)</h2>
+          <p>When verification fails, compiles a focused repair prompt naming only violating claims and exact ground-truth spans so agents fix errors in one hop.</p>
+        </div>
+      </section>
+
+      <hr class="hairline">
+
+      <section class="ecosystem-section" aria-labelledby="gates-heading">
+        <h2 id="gates-heading">Eight Deterministic Verification Gates</h2>
+        <p class="ecosystem-sub">Citation entailment meets AST workspace symbol verification, exposed via CLI, Python SDK, REST API, and MCP.</p>
+        <div class="eco-badges">
+          <div class="eco-item"><div class="eco-circle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div><span>TG001 Citation</span></div>
+          <div class="eco-item"><div class="eco-circle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><span>TG002 Support</span></div>
+          <div class="eco-item"><div class="eco-circle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7l-4 4 4 4M16 7l4 4-4 4"/></svg></div><span>TG003 Polarity</span></div>
+          <div class="eco-item"><div class="eco-circle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8h10M7 16h10M9 4v16M15 4v16"/></svg></div><span>TG004 Numbers</span></div>
+          <div class="eco-item"><div class="eco-circle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7l-2-2H5a2 2 0 0 0-2 2Z"/></svg></div><span>TG006 Paths</span></div>
+          <div class="eco-item"><div class="eco-circle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span>TG008 AST</span></div>
+        </div>
+        <p class="inline-cta-links">
+          Test claims interactively in <a href="studio.html">Studio</a>, inspect the <a href="proof.html">40-Scenario Benchmark</a>, or wire up <a href="docs.html">MCP &amp; Docs</a>.
+        </p>
+      </section>
+
+      <hr class="hairline">
+
+      <section aria-labelledby="faq-heading">
+        <h2 class="sec-title" id="faq-heading">Frequently Asked Questions</h2>
+        <div class="faq-stack">
+          <details class="faq-item">
+            <summary>Why use TruthGate instead of an LLM-as-a-Judge guardrail?</summary>
+            <p>LLM judges add 1&ndash;3 seconds of latency, extra API cost, and stochastic variance. TruthGate audits citations, negation flips, numeric drift, and AST symbols deterministically in <code>0.128 ms</code> P50 with <code>100.0%</code> precision and recall on its 40-scenario benchmark.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What rules does TruthGate check across text and code?</summary>
+            <p><code>TG001</code>&ndash;<code>TG005</code> check phantom source IDs, IDF-weighted entity support, negation/antonym polarity inversions, numeric/currency drift, and uncited factual assertions. <code>TG006</code>&ndash;<code>TG008</code> ground file paths, <code>#Lstart-Lend</code> ranges, and AST symbols.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Does TruthGate work as an MCP Server and HTTP Workbench?</summary>
+            <p>Yes. Run <code>truthgate mcp</code> for Stdio JSON-RPC 2.0 MCP or <code>truthgate serve-http</code> for Streamable HTTP/SSE MCP, REST endpoints, Prometheus metrics, and the Workbench UI.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="studio.html">Studio</a> &middot;
+        <a href="proof.html">Benchmark</a> &middot;
+        <a href="rules.html">Rules</a> &middot;
+        <a href="docs.html">Docs</a> &middot;
+        <a href="llms.txt">llms.txt</a> &middot;
+        <a href="llms-full.txt">llms-full.txt</a> &middot;
+        <a href="https://github.com/codesphere-u/truthgate">GitHub</a> &middot;
+        <a href="https://github.com/codesphere-u/truthgate/releases/tag/v1.1.0">v1.1.0</a>
+      </div>
+      <div>Privacy-friendly analytics via Plausible &middot; MIT License &middot; <a href="https://github.com/codesphere-u">codesphere-u</a></div>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
