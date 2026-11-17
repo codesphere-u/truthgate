@@ -22,6 +22,12 @@ MCP_TOOLS: list[dict[str, Any]] = [
             "across deterministic rules TG001-TG008, returning claim-by-claim verdicts and a "
             "surgical self-correction prompt when any check fails."
         ),
+        "annotations": {
+            "readOnlyHint": True,
+            "destructiveHint": False,
+            "idempotentHint": True,
+            "openWorldHint": False,
+        },
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -64,6 +70,12 @@ MCP_TOOLS: list[dict[str, Any]] = [
             "Verify all file paths, #Lstart-Lend line ranges, and AST symbols referenced in "
             "markdown text against a workspace directory (rules TG006-TG008)."
         ),
+        "annotations": {
+            "readOnlyHint": True,
+            "destructiveHint": False,
+            "idempotentHint": True,
+            "openWorldHint": False,
+        },
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -82,6 +94,12 @@ MCP_TOOLS: list[dict[str, Any]] = [
     {
         "name": "truthgate_list_rules",
         "description": "List all 8 deterministic verification rules (TG001-TG008) enforced by TruthGate.",
+        "annotations": {
+            "readOnlyHint": True,
+            "destructiveHint": False,
+            "idempotentHint": True,
+            "openWorldHint": False,
+        },
         "inputSchema": {
             "type": "object",
             "properties": {},
@@ -90,6 +108,12 @@ MCP_TOOLS: list[dict[str, Any]] = [
     {
         "name": "truthgate_run_benchmark",
         "description": "Run the reproducible 40-scenario TruthGate hallucination & grounding benchmark suite.",
+        "annotations": {
+            "readOnlyHint": True,
+            "destructiveHint": False,
+            "idempotentHint": True,
+            "openWorldHint": False,
+        },
         "inputSchema": {
             "type": "object",
             "properties": {},

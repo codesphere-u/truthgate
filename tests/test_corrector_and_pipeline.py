@@ -138,13 +138,18 @@ def test_mcp_server_jsonrpc_protocol(tmp_path: Path) -> None:
     # 4. tools/list
     list_resp = server.handle_request({"jsonrpc": "2.0", "id": 3, "method": "tools/list"})
     assert list_resp is not None
-    tool_names = [t["name"] for t in list_resp["result"]["tools"]]
+    tools = list_resp["result"]["tools"]
+    tool_names = [t["name"] for t in tools]
     assert tool_names == [
         "truthgate_verify_response",
         "truthgate_ground_workspace_refs",
         "truthgate_list_rules",
         "truthgate_run_benchmark",
     ]
+    for tool in tools:
+        ann = tool["annotations"]
+        for key in ("readOnlyHint", "destructiveHint", "idempotentHint", "openWorldHint"):
+            assert isinstance(ann[key], bool)
 
     # 5. tools/call -> truthgate_verify_response
     verify_resp = server.handle_request(
