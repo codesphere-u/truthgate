@@ -8,6 +8,7 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-JSON--RPC%202.0-0369a1.svg)](#mcp-server-integration)
+[![M8ven Score](https://m8ven.ai/badge/mcp/codesphere-u-truthgate-9olx8d)](https://m8ven.ai/mcp/codesphere-u-truthgate-9olx8d?s=readme)
 
 **Deterministic Agent Hallucination Auditor, Citation-Span Entailment Verifier & Workspace Symbol Grounding Engine (with MCP Server)**
 
